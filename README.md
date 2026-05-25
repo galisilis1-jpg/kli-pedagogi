@@ -1,2 +1,2 @@
 # kli-pedagogi
-כלי לבניית תוכניות חינוכיות לפעוטות בגיל הרך
+A tool for creating individualized educational plans for toddlers in early childhood education.
