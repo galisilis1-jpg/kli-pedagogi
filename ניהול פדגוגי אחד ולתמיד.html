@@ -1,0 +1,1082 @@
+<!DOCTYPE html>
+<!-- saved from url=(0044)file:///C:/Users/Gali/Downloads/index_1.html -->
+<html lang="he" dir="rtl"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ניהול פדגוגי</title>
+<link rel="preconnect" href="https://fonts.googleapis.com/">
+<link href="./ניהול פדגוגי אחד ולתמיד_files/css2" rel="stylesheet">
+<link rel="stylesheet" href="./ניהול פדגוגי אחד ולתמיד_files/tabler-icons.min.css">
+<style>
+:root {
+  --indigo: #4F46E5;
+  --indigo-dark: #3730A3;
+  --indigo-light: #EEF2FF;
+  --indigo-mid: #C7D2FE;
+  --blue: #3B82F6;
+  --blue-light: #EFF6FF;
+  --green: #10B981;
+  --green-light: #ECFDF5;
+  --text: #111827;
+  --text-soft: #6B7280;
+  --text-lighter: #9CA3AF;
+  --border: #E5E7EB;
+  --border-soft: #F3F4F6;
+  --bg: #F9FAFB;
+  --white: #FFFFFF;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.04);
+  --shadow: 0 4px 12px rgba(0,0,0,0.06), 0 1px 3px rgba(0,0,0,0.04);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Heebo', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+input, select, textarea, button { font-family: 'Heebo', sans-serif; }
+
+.app { display: flex; min-height: 100vh; }
+
+/* Sidebar */
+.sidebar {
+  width: 230px; flex-shrink: 0;
+  background: var(--white);
+  border-left: 1px solid var(--border);
+  padding: 1.5rem 1rem;
+  display: flex; flex-direction: column; gap: 4px;
+  position: sticky; top: 0; height: 100vh;
+}
+.sidebar-logo {
+  display: flex; align-items: center; gap: 10px;
+  padding: 0 6px; margin-bottom: 1.75rem;
+}
+.logo-icon {
+  width: 38px; height: 38px;
+  background: var(--indigo); border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  color: #fff; font-size: 18px;
+}
+.logo-text { font-size: 14px; font-weight: 700; color: var(--text); }
+.logo-sub { font-size: 11px; color: var(--text-soft); margin-top: 1px; }
+.nav-section-label {
+  font-size: 10px; font-weight: 700; color: var(--text-lighter);
+  text-transform: uppercase; letter-spacing: 0.08em;
+  padding: 0 10px; margin: 10px 0 4px;
+}
+.nav-btn {
+  display: flex; align-items: center; gap: 9px;
+  width: 100%; padding: 9px 10px;
+  border-radius: 8px; border: none;
+  background: transparent; color: var(--text-soft);
+  font-size: 13px; font-weight: 500; cursor: pointer;
+  transition: all 0.15s; text-align: right;
+}
+.nav-btn:hover { background: var(--bg); color: var(--text); }
+.nav-btn.active { background: var(--indigo-light); color: var(--indigo); font-weight: 600; }
+.nav-btn i { font-size: 17px; }
+.nav-btn .nav-count {
+  margin-right: auto; background: var(--indigo-mid);
+  color: var(--indigo-dark); font-size: 10px; font-weight: 700;
+  padding: 1px 7px; border-radius: 999px; display: none;
+}
+.nav-btn.active .nav-count { display: inline; }
+
+/* Main */
+.main { flex: 1; padding: 2rem 2.5rem; overflow-y: auto; }
+.content-wrap { max-width: 900px; margin: 0 auto; }
+
+/* Page header */
+.page-header { margin-bottom: 1.75rem; display: flex; align-items: flex-start; justify-content: space-between; }
+.page-title { font-size: 22px; font-weight: 700; color: var(--text); letter-spacing: -0.3px; }
+.page-sub { font-size: 13px; color: var(--text-soft); margin-top: 3px; }
+
+/* Cards */
+.card {
+  background: var(--white);
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 1.25rem;
+}
+.card-title { font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 1rem; display: flex; align-items: center; gap: 7px; }
+.card-title i { font-size: 16px; color: var(--indigo); }
+
+.section { display: none; }
+.section.active { display: block; }
+
+/* Form */
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.form-group { display: flex; flex-direction: column; gap: 5px; }
+.form-group.full { grid-column: 1 / -1; }
+label { font-size: 12px; font-weight: 600; color: var(--text-soft); }
+input, select, textarea {
+  font-size: 13px; padding: 9px 12px;
+  border: 1.5px solid var(--border);
+  border-radius: 9px;
+  background: var(--white);
+  color: var(--text); width: 100%;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+input:focus, select:focus, textarea:focus {
+  outline: none; border-color: var(--indigo);
+  box-shadow: 0 0 0 3px rgba(79,70,229,0.1);
+}
+textarea { resize: vertical; line-height: 1.6; }
+select { cursor: pointer; }
+
+/* Buttons */
+.btn-primary {
+  background: var(--indigo); color: #fff;
+  border: none; padding: 10px 20px;
+  border-radius: 9px; font-size: 13px; font-weight: 600;
+  cursor: pointer; width: 100%;
+  display: flex; align-items: center; justify-content: center; gap: 7px;
+  transition: background 0.15s, transform 0.1s;
+  box-shadow: 0 1px 3px rgba(79,70,229,0.3);
+}
+.btn-primary:hover { background: var(--indigo-dark); }
+.btn-primary:active { transform: scale(0.99); }
+.btn-primary:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+.btn-save {
+  background: var(--green); color: #fff;
+  border: none; padding: 10px 20px;
+  border-radius: 9px; font-size: 13px; font-weight: 600;
+  cursor: pointer; width: 100%;
+  display: flex; align-items: center; justify-content: center; gap: 7px;
+  transition: background 0.15s;
+  box-shadow: 0 1px 3px rgba(16,185,129,0.3);
+}
+.btn-save:hover { background: #059669; }
+.btn-sm {
+  background: var(--white); border: 1.5px solid var(--border);
+  color: var(--text-soft); padding: 5px 11px;
+  border-radius: 7px; font-size: 12px; font-weight: 500;
+  cursor: pointer; display: inline-flex; align-items: center; gap: 4px;
+  transition: all 0.12s;
+}
+.btn-sm:hover { background: var(--bg); border-color: #D1D5DB; }
+.btn-danger { border-color: #FECACA; color: #DC2626; }
+.btn-danger:hover { background: #FEF2F2; border-color: #FCA5A5; }
+
+/* Stats */
+.stats-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; margin-bottom: 1.5rem; }
+.stat-card {
+  background: var(--white); border-radius: 12px;
+  border: 1px solid var(--border); padding: 1.1rem 1.25rem;
+  box-shadow: var(--shadow-sm);
+  display: flex; align-items: center; gap: 14px;
+}
+.stat-icon-wrap {
+  width: 42px; height: 42px; border-radius: 10px;
+  display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0;
+}
+.stat-icon-wrap.blue { background: var(--blue-light); }
+.stat-icon-wrap.indigo { background: var(--indigo-light); }
+.stat-icon-wrap.green { background: var(--green-light); }
+.stat-label { font-size: 11px; color: var(--text-soft); font-weight: 500; }
+.stat-value { font-size: 24px; font-weight: 700; color: var(--text); line-height: 1.1; margin-top: 1px; }
+
+/* Child cards */
+.child-card {
+  background: var(--white);
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  border-right: 3px solid var(--indigo);
+  padding: 1.25rem;
+  margin-bottom: 0.85rem;
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow 0.15s;
+}
+.child-card:hover { box-shadow: var(--shadow); }
+
+/* Badges */
+.badge {
+  display: inline-flex; align-items: center;
+  font-size: 11px; padding: 3px 10px;
+  border-radius: 999px; font-weight: 600;
+  background: var(--indigo-light); color: var(--indigo);
+}
+.badge-done { background: var(--green-light); color: var(--green); }
+.kb-tag {
+  display: inline-flex; font-size: 10px; padding: 2px 8px;
+  border-radius: 999px; background: var(--indigo-light);
+  color: var(--indigo); font-weight: 600; margin-left: 5px;
+}
+.source-badge {
+  font-size: 10px; padding: 2px 8px; border-radius: 999px;
+  background: var(--green-light); color: var(--green);
+  font-weight: 600; margin-right: 4px;
+}
+
+/* AI */
+.ai-box {
+  background: var(--indigo-light);
+  border: 1.5px solid var(--indigo-mid);
+  border-radius: 10px; padding: 12px 14px;
+  font-size: 12px; color: var(--text);
+  white-space: pre-line; line-height: 1.8; margin-top: 10px;
+}
+.ai-header {
+  display: flex; align-items: center; gap: 6px;
+  font-size: 11px; font-weight: 700;
+  color: var(--indigo); margin-bottom: 8px;
+}
+
+/* Search */
+.search-bar { display: flex; gap: 8px; margin-bottom: 1rem; }
+.search-bar input { flex: 1; }
+
+/* Empty */
+.empty-state { text-align: center; padding: 3.5rem 1rem; color: var(--text-lighter); }
+.empty-icon { font-size: 40px; display: block; margin-bottom: 10px; color: var(--indigo-mid); }
+.empty-state p { font-size: 14px; font-weight: 500; color: var(--text-soft); }
+.empty-state span { font-size: 12px; margin-top: 4px; display: block; }
+
+/* Spinner */
+.spinner {
+  display: inline-block; width: 13px; height: 13px;
+  border: 2px solid rgba(255,255,255,0.35);
+  border-top-color: #fff; border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Toast */
+.toast {
+  position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
+  background: #111827; color: #fff;
+  padding: 9px 18px; border-radius: 10px;
+  font-size: 13px; font-weight: 500;
+  opacity: 0; transition: opacity 0.25s;
+  pointer-events: none; z-index: 999; white-space: nowrap;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+  display: flex; align-items: center; gap: 7px;
+}
+.toast.show { opacity: 1; }
+
+/* Divider */
+.divider { height: 1px; background: var(--border); margin: 1.25rem 0; }
+
+/* KB entry */
+.kb-entry {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: 12px; padding: 14px 16px; margin-bottom: 10px;
+  box-shadow: var(--shadow-sm);
+}
+
+/* Export row */
+.export-row {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 12px 0; border-bottom: 1px solid var(--border-soft);
+}
+.export-row:last-child { border-bottom: none; }
+.kb-tab {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 8px 14px; border-radius: 9px;
+  border: 1.5px solid var(--border); background: var(--white);
+  color: var(--text-soft); font-size: 12px; font-weight: 500; cursor: pointer;
+  transition: all 0.15s;
+}
+.kb-tab:hover { background: var(--bg); }
+.kb-tab.active { background: var(--indigo-light); border-color: var(--indigo-mid); color: var(--indigo); font-weight: 600; }
+</style>
+</head>
+<body>
+<div class="app">
+
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <div class="logo-icon"><i class="ti ti-plant-2"></i></div>
+      <div>
+        <div class="logo-text">ניהול פדגוגי</div>
+        <div class="logo-sub">גיל הרך</div>
+      </div>
+    </div>
+    <div class="nav-section-label">ראשי</div>
+    <button class="nav-btn active" onclick="nav(&#39;new&#39;)" id="btn-new">
+      <i class="ti ti-plus"></i> תוכנית חדשה
+    </button>
+    <button class="nav-btn" onclick="nav(&#39;list&#39;)" id="btn-list">
+      <i class="ti ti-list-check"></i> מעקב ותצפיות
+      <span class="nav-count" id="count-list">0</span>
+    </button>
+    <div class="nav-section-label">כלים</div>
+    <button class="nav-btn" onclick="nav(&#39;activities&#39;)" id="btn-activities">
+      <i class="ti ti-puzzle"></i> פעילויות
+      <span class="nav-count" id="count-activities">0</span>
+    </button>
+    <button class="nav-btn" onclick="nav(&#39;kb&#39;)" id="btn-kb">
+      <i class="ti ti-books"></i> בסיס ידע
+      <span class="nav-count" id="count-kb">0</span>
+    </button>
+    <button class="nav-btn" onclick="nav(&#39;export&#39;)" id="btn-export">
+      <i class="ti ti-file-export"></i> ייצוא דוחות
+    </button>
+  </aside>
+
+  <main class="main">
+    <div class="content-wrap">
+
+      <!-- NEW PLAN -->
+      <section id="section-new" class="section active">
+        <div class="page-header">
+          <div>
+            <div class="page-title">תוכנית עבודה אישית</div>
+            <div class="page-sub">הזיני פרטי ילד/ה וייצרי תוכנית מבוססת ידע מחקרי</div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title"><i class="ti ti-user"></i> פרטי הילד/ה</div>
+          <div class="form-grid">
+            <div class="form-group"><label>שם הילד/ה</label><input id="name" placeholder="שם מלא"></div>
+            <div class="form-group"><label>מעון / קבוצה</label><input id="nursery" placeholder="פנינה, כוכבים..."></div>
+            <div class="form-group"><label>גיל (חודשים)</label><input id="age" type="number" placeholder="24" min="0" max="84"></div>
+            <div class="form-group">
+              <label>תחום התפתחותי</label>
+              <select id="domain" onchange="applyProtocol()">
+                <option value="">-- בחרי תחום --</option>
+                <option>ויסות רגשי</option><option>גמילה ממוצץ</option>
+                <option>שפה ותקשורת</option><option>גמילה מחיתול</option>
+                <option>חברתי</option><option>גבולות</option>
+              </select>
+            </div>
+            <div class="form-group full"><label>תאריך פתיחה</label><input id="date" type="date"></div>
+            <div class="form-group">
+              <label>משך התוכנית</label>
+              <select id="duration">
+                <option value="">-- בחרי משך --</option>
+                <option value="2 שבועות">2 שבועות</option>
+                <option value="חודש">חודש</option>
+                <option value="6 שבועות">6 שבועות</option>
+                <option value="2 חודשים">2 חודשים</option>
+                <option value="3 חודשים">3 חודשים</option>
+                <option value="לפי הצורך">לפי הצורך</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>יעד / מטרה קצרה</label>
+              <input id="goal" placeholder="לדוג׳ הפחתת התפרצויות ל-1 ביום">
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title"><i class="ti ti-file-text"></i> פרוטוקול עבודה</div>
+          <div class="form-group" style="margin-bottom:12px;">
+            <textarea id="protocol" rows="8" placeholder="בחרי תחום לטעינת פרוטוקול בסיסי, או כתבי בחופשיות..."></textarea>
+          </div>
+          <button class="btn-primary" id="ai-btn" onclick="generateAI()" style="margin-bottom:10px;">
+            <i class="ti ti-sparkles"></i> ייצר תוכנית מותאמת מבסיס הידע
+          </button>
+          <div id="ai-out" style="display:none;"></div>
+        </div>
+        <button class="btn-save" onclick="savePlan()">
+          <i class="ti ti-device-floppy"></i> שמור תוכנית
+        </button>
+      </section>
+
+      <!-- LIST -->
+      <section id="section-list" class="section">
+        <div class="page-header">
+          <div>
+            <div class="page-title">מעקב ותצפיות</div>
+            <div class="page-sub">עקבי אחר ההתקדמות של כל ילד/ה</div>
+          </div>
+        </div>
+        <div class="stats-row" id="stats-row"></div>
+        <div class="search-bar">
+          <input id="search" placeholder="🔍  חיפוש לפי שם..." oninput="renderList()">
+          <select id="filter-domain" onchange="renderList()" style="width:165px;">
+            <option value="">כל התחומים</option>
+            <option>ויסות רגשי</option><option>גמילה ממוצץ</option>
+            <option>שפה ותקשורת</option><option>גמילה מחיתול</option>
+            <option>חברתי</option><option>גבולות</option>
+          </select>
+        </div>
+        <div id="list-container"></div>
+      </section>
+
+      <!-- ACTIVITIES -->
+      <section id="section-activities" class="section">
+        <div class="page-header">
+          <div>
+            <div class="page-title">מאגר פעילויות</div>
+            <div class="page-sub">פעילויות התפתחותיות לפי תחום — ידניות ומבוססות AI</div>
+          </div>
+        </div>
+
+        <div style="display:flex;gap:8px;margin-bottom:1rem;">
+          <button class="kb-tab active" id="atab-manual" onclick="switchActTab(&#39;manual&#39;)"><i class="ti ti-pencil"></i> הוספה ידנית</button>
+          <button class="kb-tab" id="atab-ai" onclick="switchActTab(&#39;ai&#39;)"><i class="ti ti-sparkles"></i> ייצור עם AI</button>
+        </div>
+
+        <!-- Manual activity -->
+        <div class="card" id="act-panel-manual">
+          <div class="card-title"><i class="ti ti-pencil"></i> פעילות ידנית חדשה</div>
+          <div class="form-grid">
+            <div class="form-group"><label>שם הפעילות</label><input id="act-title" placeholder="לדוג׳ משחק הרגשות"></div>
+            <div class="form-group">
+              <label>תחום התפתחותי</label>
+              <select id="act-domain">
+                <option value="כללי">כללי</option>
+                <option>ויסות רגשי</option><option>גמילה ממוצץ</option>
+                <option>שפה ותקשורת</option><option>גמילה מחיתול</option>
+                <option>חברתי</option><option>גבולות</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>גיל מומלץ (חודשים)</label>
+              <input id="act-age" placeholder="לדוג׳ 18-36">
+            </div>
+            <div class="form-group">
+              <label>משך הפעילות</label>
+              <select id="act-duration">
+                <option>5 דקות</option><option>10 דקות</option>
+                <option>15 דקות</option><option>20 דקות</option>
+                <option>30 דקות</option>
+              </select>
+            </div>
+            <div class="form-group full">
+              <label>תיאור הפעילות</label>
+              <textarea id="act-desc" rows="4" placeholder="תארי את הפעילות — מטרה, חומרים, שלבים..."></textarea>
+            </div>
+            <div class="form-group full">
+              <button class="btn-primary" onclick="addActivity()"><i class="ti ti-plus"></i> הוסף פעילות</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- AI activity generator -->
+        <div class="card" id="act-panel-ai" style="display:none;">
+          <div class="card-title"><i class="ti ti-sparkles"></i> ייצור פעילויות עם AI</div>
+          <p style="font-size:12px;color:var(--text-soft);margin-bottom:14px;">ה-AI יייצר פעילויות מותאמות לפי תחום וגיל, בהתבסס על בסיס הידע שלכן.</p>
+          <div class="form-grid">
+            <div class="form-group">
+              <label>תחום התפתחותי</label>
+              <select id="act-ai-domain">
+                <option>ויסות רגשי</option><option>גמילה ממוצץ</option>
+                <option>שפה ותקשורת</option><option>גמילה מחיתול</option>
+                <option>חברתי</option><option>גבולות</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>טווח גיל (חודשים)</label>
+              <input id="act-ai-age" placeholder="לדוג׳ 18-36">
+            </div>
+            <div class="form-group">
+              <label>מספר פעילויות לייצר</label>
+              <select id="act-ai-count">
+                <option value="3">3 פעילויות</option>
+                <option value="5">5 פעילויות</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>משך מועדף</label>
+              <select id="act-ai-duration">
+                <option>5-10 דקות</option><option>10-15 דקות</option><option>15-20 דקות</option>
+              </select>
+            </div>
+            <div class="form-group full">
+              <button class="btn-primary" id="btn-gen-act" onclick="generateActivities()">
+                <i class="ti ti-sparkles"></i> ייצר פעילויות
+              </button>
+              <div id="act-ai-out" style="display:none;" class="ai-box"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Filter + list -->
+        <div style="display:flex;gap:8px;margin-bottom:0.75rem;margin-top:0.5rem;">
+          <select id="act-filter" onchange="renderActivities()" style="width:180px;">
+            <option value="">כל התחומים</option>
+            <option>כללי</option><option>ויסות רגשי</option><option>גמילה ממוצץ</option>
+            <option>שפה ותקשורת</option><option>גמילה מחיתול</option>
+            <option>חברתי</option><option>גבולות</option>
+          </select>
+        </div>
+        <div id="activities-list"></div>
+      </section>
+
+      <!-- KB -->
+      <section id="section-kb" class="section">
+        <div class="page-header">
+          <div>
+            <div class="page-title">בסיס ידע פדגוגי</div>
+            <div class="page-sub">הוסיפי מחקרים ופרוטוקולים — ה-AI ישלב אותם אוטומטית</div>
+          </div>
+        </div>
+        <!-- Tab switcher -->
+        <div style="display:flex;gap:8px;margin-bottom:1rem;">
+          <button class="kb-tab active" id="tab-text" onclick="switchKBTab(&#39;text&#39;)"><i class="ti ti-pencil"></i> כתיבה ידנית</button>
+          <button class="kb-tab" id="tab-file" onclick="switchKBTab(&#39;file&#39;)"><i class="ti ti-file-upload"></i> העלאת קובץ PDF/Word</button>
+          <button class="kb-tab" id="tab-url" onclick="switchKBTab(&#39;url&#39;)"><i class="ti ti-link"></i> קישור לאתר/מאמר</button>
+        </div>
+
+        <!-- Manual text -->
+        <div class="card" id="kb-panel-text">
+          <div class="card-title"><i class="ti ti-pencil"></i> הוספה ידנית</div>
+          <div class="form-grid">
+            <div class="form-group"><label>כותרת / שם המחקר</label><input id="kb-title" placeholder="לדוג׳ Brazelton touchpoints"></div>
+            <div class="form-group">
+              <label>תחום רלוונטי</label>
+              <select id="kb-domain">
+                <option value="כללי">כללי (כל התחומים)</option>
+                <option>ויסות רגשי</option><option>גמילה ממוצץ</option>
+                <option>שפה ותקשורת</option><option>גמילה מחיתול</option>
+                <option>חברתי</option><option>גבולות</option>
+              </select>
+            </div>
+            <div class="form-group full"><label>תוכן / תמצית הידע</label><textarea id="kb-content" rows="4" placeholder="תארי את עיקרי המחקר, הגישה, ההמלצות..."></textarea></div>
+            <div class="form-group"><label>מקור (לא חובה)</label><input id="kb-source" placeholder="שם חוקר / כתב עת / שנה"></div>
+            <div class="form-group" style="align-self:flex-end;">
+              <button class="btn-primary" onclick="addKB()"><i class="ti ti-plus"></i> הוסף לבסיס הידע</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- File upload -->
+        <div class="card" id="kb-panel-file" style="display:none;">
+          <div class="card-title"><i class="ti ti-file-upload"></i> העלאת קובץ PDF או Word</div>
+          <p style="font-size:12px;color:var(--text-soft);margin-bottom:14px;">ה-AI יקרא את הקובץ ויחלץ את הידע הרלוונטי אוטומטית.</p>
+          <div class="form-grid">
+            <div class="form-group">
+              <label>תחום רלוונטי</label>
+              <select id="kb-file-domain">
+                <option value="כללי">כללי (כל התחומים)</option>
+                <option>ויסות רגשי</option><option>גמילה ממוצץ</option>
+                <option>שפה ותקשורת</option><option>גמילה מחיתול</option>
+                <option>חברתי</option><option>גבולות</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>מקור (לא חובה)</label>
+              <input id="kb-file-source" placeholder="שם חוקר / שנה">
+            </div>
+            <div class="form-group full">
+              <label>בחרי קובץ (PDF או Word)</label>
+              <div id="drop-zone" style="border:2px dashed var(--indigo-mid);border-radius:10px;padding:2rem;text-align:center;cursor:pointer;background:var(--indigo-light);transition:all 0.15s;" onclick="document.getElementById(&#39;kb-file-input&#39;).click()" ondragover="event.preventDefault();this.style.borderColor=&#39;var(--indigo)&#39;" ondragleave="this.style.borderColor=&#39;var(--indigo-mid)&#39;" ondrop="handleFileDrop(event)">
+                <i class="ti ti-file-upload" style="font-size:28px;color:var(--indigo);display:block;margin-bottom:8px;"></i>
+                <div style="font-size:13px;font-weight:600;color:var(--indigo);">גרירי קובץ לכאן או לחצי לבחירה</div>
+                <div style="font-size:11px;color:var(--text-soft);margin-top:4px;">PDF, DOC, DOCX, TXT</div>
+              </div>
+              <input type="file" id="kb-file-input" accept=".pdf,.doc,.docx,.txt" style="display:none;" onchange="handleFileSelect(this)">
+              <div id="file-status" style="display:none;font-size:12px;color:var(--text-soft);margin-top:8px;padding:8px 12px;background:var(--bg);border-radius:8px;"></div>
+            </div>
+            <div class="form-group full">
+              <button class="btn-primary" id="btn-process-file" onclick="processFile()" disabled=""><i class="ti ti-sparkles"></i> עבד קובץ עם AI והוסף לבסיס הידע</button>
+              <div id="file-ai-out" style="display:none;" class="ai-box"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- URL -->
+        <div class="card" id="kb-panel-url" style="display:none;">
+          <div class="card-title"><i class="ti ti-link"></i> קישור לאתר או מאמר</div>
+          <p style="font-size:12px;color:var(--text-soft);margin-bottom:14px;">הדביקי קישור — ה-AI יקרא את הדף ויסכם את הידע הרלוונטי.</p>
+          <div class="form-grid">
+            <div class="form-group full">
+              <label>כתובת URL</label>
+              <input id="kb-url" placeholder="https://..." dir="ltr" style="text-align:left;">
+            </div>
+            <div class="form-group">
+              <label>תחום רלוונטי</label>
+              <select id="kb-url-domain">
+                <option value="כללי">כללי (כל התחומים)</option>
+                <option>ויסות רגשי</option><option>גמילה ממוצץ</option>
+                <option>שפה ותקשורת</option><option>גמילה מחיתול</option>
+                <option>חברתי</option><option>גבולות</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>כותרת (לא חובה)</label>
+              <input id="kb-url-title" placeholder="שם המאמר/האתר">
+            </div>
+            <div class="form-group full">
+              <button class="btn-primary" id="btn-process-url" onclick="processURL()"><i class="ti ti-sparkles"></i> קרא וסכם עם AI</button>
+              <div id="url-ai-out" style="display:none;" class="ai-box"></div>
+            </div>
+          </div>
+        </div>
+
+        <div id="kb-list"></div>
+      </section>
+
+      <!-- EXPORT -->
+      <section id="section-export" class="section">
+        <div class="page-header">
+          <div>
+            <div class="page-title">ייצוא דוחות</div>
+            <div class="page-sub">הורידי דוח מלא לכל ילד/ה לשיתוף עם ההורים</div>
+          </div>
+        </div>
+        <div class="card">
+          <div id="export-list"></div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+</div>
+
+<div class="toast" id="toast"><i class="ti ti-check"></i> <span id="toast-msg"></span></div>
+
+<script>
+const BASE_PROTOCOLS = {
+  'ויסות רגשי': "פרוטוקול עבודה - מודל הוויסות ההדדי:\n1. זיהוי טריגרים: רישום מה מקדים התפרצות.\n2. תיקוף: שיום הרגש ('אני רואה שאת כועסת').\n3. אלטרנטיבה: מתן כלים מילוליים ברגעי רוגע.\nשותפות הורים: יומן רגשות משותף גן-בית.",
+  'גמילה ממוצץ': "פרוטוקול הדרגתיות:\n1. מוצץ לשינה בלבד.\n2. מקום קבוע: בתיק/מיטה.\n3. טקס פרידה בעת בשלות.\nשותפות הורים: אחידות בית-גן.",
+  'שפה ותקשורת': "פרוטוקול מודלינג:\n1. השהיית תגובה לטובת ניסיון מילולי.\n2. שיקוף מרחיב.\n3. שאלות פתוחות.\nשותפות הורים: צמצום מסכים.",
+  'גמילה מחיתול': "גישת ברזלטון:\n1. זיהוי בשלות מוטורית וקוגניטיבית.\n2. חשיפה לסיר ללא לחץ.\n3. הכלה — פספוסים חלק מהתהליך.\nשותפות הורים: הכלה, הימנעות מלחץ.",
+  'חברתי': "פרוטוקול תיווך:\n1. תיווך במשחק משותף.\n2. לימוד לקיחת תור ושיתוף.\nשותפות הורים: מפגשים חברתיים מונחים.",
+  'גבולות': "מודל הסמכות המגוננת:\n1. עקביות הצוות בשפה אחידה.\n2. בחירה בתוך מסגרת.\nשותפות הורים: תיאום ציפיות."
+};
+
+const GEMINI_API_KEY = 'AIzaSyBjvDxc6L3wZYxUrqZGoq8AGDcAboScJC4';
+const STORAGE_KEY_ACTIVITIES = 'ped_activities_v1';
+
+async function callGemini(prompt) {
+  const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${GEMINI_API_KEY}`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
+  });
+  const data = await res.json();
+  if(data.error) throw new Error(data.error.message);
+  return data.candidates?.[0]?.content?.parts?.[0]?.text || 'לא התקבלה תשובה';
+}
+function loadActivities() { try { return JSON.parse(localStorage.getItem(STORAGE_KEY_ACTIVITIES)||'[]'); } catch(e) { try { return JSON.parse(sessionStorage.getItem(STORAGE_KEY_ACTIVITIES)||'[]'); } catch(e2) { return []; } } }
+function saveActivities(d) { try { localStorage.setItem(STORAGE_KEY_ACTIVITIES, JSON.stringify(d)); } catch(e) { sessionStorage.setItem(STORAGE_KEY_ACTIVITIES, JSON.stringify(d)); } }
+const STORAGE_KEY_KB = 'ped_kb_v1';
+
+function loadPlans() { try { return JSON.parse(localStorage.getItem(STORAGE_KEY_PLANS)||'[]'); } catch(e) { try { return JSON.parse(sessionStorage.getItem(STORAGE_KEY_PLANS)||'[]'); } catch(e2) { return []; } } }
+function savePlans(d) { try { localStorage.setItem(STORAGE_KEY_PLANS, JSON.stringify(d)); } catch(e) { sessionStorage.setItem(STORAGE_KEY_PLANS, JSON.stringify(d)); } }
+function loadKB() { try { return JSON.parse(localStorage.getItem(STORAGE_KEY_KB)||'[]'); } catch(e) { try { return JSON.parse(sessionStorage.getItem(STORAGE_KEY_KB)||'[]'); } catch(e2) { return []; } } }
+function saveKB(d) { try { localStorage.setItem(STORAGE_KEY_KB, JSON.stringify(d)); } catch(e) { sessionStorage.setItem(STORAGE_KEY_KB, JSON.stringify(d)); } }
+
+function toast(msg) {
+  document.getElementById('toast-msg').textContent = msg;
+  const t = document.getElementById('toast');
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2200);
+}
+
+function updateCounts() {
+  const plans = loadPlans(); const kb = loadKB(); const acts = loadActivities();
+  document.getElementById('count-list').textContent = plans.length;
+  document.getElementById('count-kb').textContent = kb.length;
+  document.getElementById('count-activities').textContent = acts.length;
+  if(plans.length > 0) document.getElementById('count-list').style.display = 'inline';
+  if(kb.length > 0) document.getElementById('count-kb').style.display = 'inline';
+  if(acts.length > 0) document.getElementById('count-activities').style.display = 'inline';
+}
+
+function nav(s) {
+  ['new','list','activities','kb','export'].forEach(id => {
+    document.getElementById('section-'+id).classList.toggle('active', id===s);
+    document.getElementById('btn-'+id).classList.toggle('active', id===s);
+  });
+  if(s==='list') renderList();
+  if(s==='kb') renderKB();
+  if(s==='activities') renderActivities();
+  if(s==='export') renderExport();
+  updateCounts();
+}
+
+function applyProtocol() {
+  const d = document.getElementById('domain').value;
+  if(BASE_PROTOCOLS[d]) document.getElementById('protocol').value = BASE_PROTOCOLS[d];
+}
+
+async function generateAI() {
+  const name = document.getElementById('name').value.trim();
+  const age = document.getElementById('age').value;
+  const domain = document.getElementById('domain').value;
+  if(!name||!age||!domain) { toast('נא למלא שם, גיל ותחום קודם'); return; }
+  const kb = loadKB();
+  const relevant = kb.filter(e => e.domain==='כללי' || e.domain===domain);
+  const btn = document.getElementById('ai-btn');
+  const out = document.getElementById('ai-out');
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner"></span> מייצר תוכנית...';
+  out.style.display = 'none';
+  const kbText = relevant.length > 0
+    ? relevant.map(e => `[${e.title}${e.source?' | '+e.source:''}]:\n${e.content}`).join('\n\n')
+    : '(אין רשומות בבסיס הידע — ניתן להוסיף דרך לשונית "בסיס ידע")';
+  const prompt = `אתה יועץ פדגוגי מומחה לגיל הרך.\n\nבסיס הידע של הצוות:\n${kbText}\n\nפרטי הילד/ה:\n- שם: ${name}\n- גיל: ${age} חודשים\n- תחום: ${domain}\n\nצרי תוכנית עבודה אישית הכוללת:\n1. מטרה מרכזית (משפט אחד)\n2. 3 צעדים מעשיים מבוססי מחקר\n3. שיתוף הורים\n4. מקורות ששימשו\n\nענשי בעברית, תמציתי, עד 12 שורות. סיימי ב: "מקורות: [שמות רשומות הידע]"`;
+  try {
+    const text = await callGemini(prompt);
+    document.getElementById('protocol').value = text;
+    out.className = 'ai-box';
+    out.innerHTML = `<div class="ai-header"><i class="ti ti-sparkles"></i> נוצר מבסיס הידע (${relevant.length} רשומות שימשו)</div>${text.replace(/\n/g,'<br>')}`;
+    out.style.display = 'block';
+    toast('התוכנית נוצרה ✓');
+  } catch(e) {
+    out.className = 'ai-box'; out.textContent = 'שגיאה: ' + e.message; out.style.display = 'block';
+  }
+  btn.disabled = false;
+  btn.innerHTML = '<i class="ti ti-sparkles"></i> ייצר תוכנית מותאמת מבסיס הידע';
+}
+
+function savePlan() {
+  const name = document.getElementById('name').value.trim();
+  const nursery = document.getElementById('nursery').value.trim();
+  const age = document.getElementById('age').value;
+  const domain = document.getElementById('domain').value;
+  const protocol = document.getElementById('protocol').value.trim();
+  const date = document.getElementById('date').value;
+  const duration = document.getElementById('duration').value;
+  const goal = document.getElementById('goal').value.trim();
+  if(!name||!nursery||!age||!domain||!protocol) { 
+    alert('נא למלא את כל השדות: שם, מעון, גיל, תחום ופרוטוקול');
+    return; 
+  }
+  const plans = loadPlans();
+  plans.unshift({ id: Date.now(), name, nursery, age, domain, protocol, date: date||new Date().toLocaleDateString('he-IL'), duration, goal, observations:'', status:'בתהליך' });
+  savePlans(plans);
+  ['name','nursery','age','domain','protocol','goal'].forEach(id => document.getElementById(id).value='');
+  document.getElementById('duration').value='';
+  document.getElementById('date').value = new Date().toISOString().split('T')[0];
+  document.getElementById('ai-out').style.display='none';
+  toast('התוכנית נשמרה ✓');
+  updateCounts();
+  nav('list');
+}
+
+function renderList() {
+  const plans = loadPlans();
+  const search = (document.getElementById('search')?.value||'').toLowerCase();
+  const domainF = document.getElementById('filter-domain')?.value||'';
+  const filtered = plans.filter(d => (!search||d.name.toLowerCase().includes(search)) && (!domainF||d.domain===domainF));
+  const total=plans.length, active=plans.filter(d=>d.status==='בתהליך').length, done=plans.filter(d=>d.status==='הושגה').length;
+  document.getElementById('stats-row').innerHTML = `
+    <div class="stat-card"><div class="stat-icon-wrap blue">📋</div><div><div class="stat-label">סה"כ תוכניות</div><div class="stat-value">${total}</div></div></div>
+    <div class="stat-card"><div class="stat-icon-wrap indigo">🌱</div><div><div class="stat-label">בתהליך</div><div class="stat-value">${active}</div></div></div>
+    <div class="stat-card"><div class="stat-icon-wrap green">✅</div><div><div class="stat-label">הושגו</div><div class="stat-value">${done}</div></div></div>`;
+  const el = document.getElementById('list-container');
+  if(!filtered.length) {
+    el.innerHTML = '<div class="empty-state"><i class="ti ti-clipboard-list empty-icon"></i><p>אין תוכניות עדיין</p><span>לחצי על "תוכנית חדשה" כדי להתחיל</span></div>';
+    return;
+  }
+  el.innerHTML = filtered.map(d => `
+    <div class="child-card">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;">
+        <div>
+          <div style="font-size:15px;font-weight:700;color:var(--text);">${d.name}</div>
+          <div style="font-size:12px;color:var(--text-soft);margin-top:2px;">${d.nursery} &middot; ${d.age} חודשים &middot; ${d.date||''}${d.duration?' &middot; '+d.duration:''}${d.goal?' &middot; 🎯 '+d.goal:''}</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;">
+          <span class="badge ${d.status==='הושגה'?'badge-done':''}">${d.domain}</span>
+          <select style="font-size:11px;padding:4px 8px;width:auto;border-radius:8px;border:1.5px solid var(--border);background:var(--white);color:var(--text);" onchange="updateStatus(${d.id},this.value)">
+            <option ${d.status==='בתהליך'?'selected':''}>בתהליך</option>
+            <option ${d.status==='הושגה'?'selected':''}>הושגה</option>
+          </select>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+        <div>
+          <div style="font-size:11px;font-weight:600;color:var(--text-soft);margin-bottom:5px;text-transform:uppercase;letter-spacing:0.05em;">פרוטוקול</div>
+          <div style="font-size:12px;background:var(--bg);padding:10px 12px;border-radius:9px;white-space:pre-line;line-height:1.7;border:1px solid var(--border);">${d.protocol}</div>
+        </div>
+        <div>
+          <div style="font-size:11px;font-weight:600;color:var(--text-soft);margin-bottom:5px;text-transform:uppercase;letter-spacing:0.05em;">תצפיות שבועיות</div>
+          <textarea style="width:100%;height:105px;font-size:12px;padding:10px 12px;background:var(--bg);border:1.5px solid var(--border);border-radius:9px;line-height:1.6;" placeholder="כתבי תצפיות..." onblur="updateObs(${d.id},this.value)">${d.observations}</textarea>
+        </div>
+      </div>
+      <div style="display:flex;justify-content:flex-end;margin-top:10px;">
+        <button class="btn-sm btn-danger" onclick="deletePlan(${d.id})"><i class="ti ti-trash"></i> מחיקה</button>
+      </div>
+    </div>`).join('');
+}
+
+function updateStatus(id,val) { const p=loadPlans(); const i=p.find(x=>x.id===id); if(i){i.status=val;savePlans(p);toast('סטטוס עודכן');} }
+function updateObs(id,val) { const p=loadPlans(); const i=p.find(x=>x.id===id); if(i){i.observations=val;savePlans(p);toast('תצפית נשמרה ✓');} }
+function deletePlan(id) { const p=loadPlans(); savePlans(p.filter(x=>x.id!==id)); toast('נמחק'); updateCounts(); renderList(); }
+
+function addKB() {
+  const title = document.getElementById('kb-title').value.trim();
+  const content = document.getElementById('kb-content').value.trim();
+  const domain = document.getElementById('kb-domain').value;
+  const source = document.getElementById('kb-source').value.trim();
+  if(!title||!content) { toast('נא למלא כותרת ותוכן'); return; }
+  const kb = loadKB();
+  kb.unshift({ id: Date.now(), title, content, domain, source, date: new Date().toLocaleDateString('he-IL') });
+  saveKB(kb);
+  ['kb-title','kb-content','kb-source'].forEach(id => document.getElementById(id).value='');
+  toast('נוסף לבסיס הידע ✓');
+  updateCounts();
+  renderKB();
+}
+
+function deleteKB(id) { saveKB(loadKB().filter(x=>x.id!==id)); toast('נמחק'); updateCounts(); renderKB(); }
+
+function renderKB() {
+  const kb = loadKB();
+  const el = document.getElementById('kb-list');
+  if(!kb.length) {
+    el.innerHTML = '<div class="empty-state"><i class="ti ti-database empty-icon"></i><p>בסיס הידע ריק עדיין</p><span>הוסיפי מחקרים ופרוטוקולים — ה-AI ישלב אותם בתוכניות</span></div>';
+    return;
+  }
+  el.innerHTML = kb.map(e => `
+    <div class="kb-entry">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px;">
+        <div style="display:flex;align-items:center;flex-wrap:wrap;gap:4px;">
+          <span style="font-size:13px;font-weight:600;color:var(--text);">${e.title}</span>
+          <span class="kb-tag">${e.domain}</span>
+          ${e.source?`<span class="source-badge">${e.source}</span>`:''}
+        </div>
+        <button class="btn-sm btn-danger" onclick="deleteKB(${e.id})" style="flex-shrink:0;"><i class="ti ti-trash"></i></button>
+      </div>
+      <div style="font-size:12px;color:var(--text-soft);line-height:1.7;">${e.content}</div>
+      <div style="font-size:11px;color:var(--text-lighter);margin-top:6px;">${e.date}</div>
+    </div>`).join('');
+}
+
+function renderExport() {
+  const plans = loadPlans();
+  const el = document.getElementById('export-list');
+  if(!plans.length) {
+    el.innerHTML = '<div class="empty-state"><i class="ti ti-file-off empty-icon"></i><p>אין תוכניות לייצוא</p></div>';
+    return;
+  }
+  el.innerHTML = plans.map(d => `
+    <div class="export-row">
+      <div style="display:flex;align-items:center;gap:10px;">
+        <div style="width:36px;height:36px;background:var(--indigo-light);border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;color:var(--indigo);">${d.name.charAt(0)}</div>
+        <div>
+          <div style="font-size:13px;font-weight:600;color:var(--text);">${d.name}</div>
+          <div style="font-size:11px;color:var(--text-soft);">${d.nursery} · <span class="badge" style="font-size:10px;padding:1px 7px;">${d.domain}</span></div>
+        </div>
+      </div>
+      <button class="btn-sm" onclick="exportPlan(${d.id})"><i class="ti ti-download"></i> ייצא דוח</button>
+    </div>`).join('');
+}
+
+function exportPlan(id) {
+  const plans = loadPlans(); const d = plans.find(x=>x.id===id); if(!d) return;
+  const kb = loadKB();
+  const kbInfo = kb.length ? `\n\nמקורות מבסיס הידע:\n${kb.filter(e=>e.domain==='כללי'||e.domain===d.domain).map(e=>'- '+e.title+(e.source?' ('+e.source+')':'')).join('\n')||'ללא'}` : '';
+  const text = `דוח פדגוגי\n===========\nשם: ${d.name}\nמעון: ${d.nursery}\nגיל: ${d.age} חודשים\nתחום: ${d.domain}\nתאריך: ${d.date}\nסטטוס: ${d.status}\n\nפרוטוקול:\n${d.protocol}\n\nתצפיות:\n${d.observations||'טרם נרשמו'}${kbInfo}`;
+  const blob = new Blob([text],{type:'text/plain;charset=utf-8'});
+  const url = URL.createObjectURL(blob); const a = document.createElement('a');
+  a.href=url; a.download=`דוח_${d.name}.txt`; a.click(); URL.revokeObjectURL(url);
+  toast('הדוח הורד ✓');
+}
+
+
+// KB Tab switching
+function switchKBTab(tab) {
+  ['text','file','url'].forEach(t => {
+    document.getElementById('kb-panel-'+t).style.display = t===tab ? 'block' : 'none';
+    document.getElementById('tab-'+t).classList.toggle('active', t===tab);
+  });
+}
+
+// File handling
+let selectedFile = null;
+function handleFileDrop(e) {
+  e.preventDefault();
+  document.getElementById('drop-zone').style.borderColor = 'var(--indigo-mid)';
+  const file = e.dataTransfer.files[0];
+  if(file) setFile(file);
+}
+function handleFileSelect(input) {
+  if(input.files[0]) setFile(input.files[0]);
+}
+function setFile(file) {
+  selectedFile = file;
+  const status = document.getElementById('file-status');
+  status.style.display = 'block';
+  status.innerHTML = `<i class="ti ti-file" style="color:var(--indigo);"></i> <strong>${file.name}</strong> (${(file.size/1024).toFixed(1)} KB)`;
+  document.getElementById('btn-process-file').disabled = false;
+}
+
+async function processFile() {
+  if(!selectedFile) return;
+  const btn = document.getElementById('btn-process-file');
+  const out = document.getElementById('file-ai-out');
+  const domain = document.getElementById('kb-file-domain').value;
+  const source = document.getElementById('kb-file-source').value.trim();
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner"></span> קורא וסוכם...';
+  out.style.display = 'none';
+
+  try {
+    let fileContent = '';
+    if(selectedFile.type === 'application/pdf') {
+      // Read PDF as base64
+      const base64 = await new Promise((res, rej) => {
+        const r = new FileReader();
+        r.onload = () => res(r.result.split(',')[1]);
+        r.onerror = rej;
+        r.readAsDataURL(selectedFile);
+      });
+      // Gemini supports PDF via inline_data
+      const res2 = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${GEMINI_API_KEY}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ contents: [{ parts: [
+          { inline_data: { mime_type: 'application/pdf', data: base64 } },
+          { text: `אתה יועץ פדגוגי. קרא את המסמך וחלץ את הידע הפדגוגי הרלוונטי לגיל הרך.\nהחזר:\n1. כותרת המסמך (שורה אחת)\n2. תמצית הידע הפדגוגי (עד 8 שורות, בעברית)\n3. המלצות מעשיות (עד 4 נקודות)\n\nהתחל ב: "כותרת: ..." ואז "תמצית: ..."` }
+        ]}]})
+      });
+      const data2 = await res2.json();
+      fileContent = data2.candidates?.[0]?.content?.parts?.[0]?.text || '';
+    } else {
+      // TXT / DOC — read as text
+      fileContent = await new Promise((res, rej) => {
+        const r = new FileReader();
+        r.onload = () => res(r.result);
+        r.onerror = rej;
+        r.readAsText(selectedFile, 'UTF-8');
+      });
+      fileContent = await callGemini(`אתה יועץ פדגוגי. קרא את הטקסט הבא וחלץ את הידע הפדגוגי הרלוונטי לגיל הרך.\n\nטקסט:\n${fileContent.substring(0,8000)}\n\nהחזר:\n1. כותרת (שורה אחת)\n2. תמצית הידע (עד 8 שורות, בעברית)\n3. המלצות מעשיות (עד 4 נקודות)\n\nהתחל ב: "כותרת: ..." ואז "תמצית: ..."`);
+    }
+
+    // Parse title and content from AI response
+    const titleMatch = fileContent.match(/כותרת:\s*(.+)/);
+    const title = titleMatch ? titleMatch[1].trim() : selectedFile.name.replace(/\.[^.]+$/,'');
+    const content = fileContent.replace(/כותרת:\s*.+\n?/,'').trim();
+
+    // Save to KB
+    const kb = loadKB();
+    kb.unshift({ id: Date.now(), title, content, domain, source: source || selectedFile.name, date: new Date().toLocaleDateString('he-IL') });
+    saveKB(kb);
+
+    out.className = 'ai-box';
+    out.innerHTML = `<div class="ai-header"><i class="ti ti-check"></i> נוסף בהצלחה: "${title}"</div>${content.replace(/\n/g,'<br>')}`;
+    out.style.display = 'block';
+    toast('הקובץ עובד ונוסף לבסיס הידע ✓');
+    updateCounts();
+    selectedFile = null;
+    document.getElementById('file-status').style.display = 'none';
+    document.getElementById('kb-file-input').value = '';
+  } catch(e) {
+    out.className = 'ai-box'; out.textContent = 'שגיאה בעיבוד הקובץ. נסי שוב.'; out.style.display = 'block';
+  }
+  btn.disabled = false;
+  btn.innerHTML = '<i class="ti ti-sparkles"></i> עבד קובץ עם AI והוסף לבסיס הידע';
+}
+
+async function processURL() {
+  const url = document.getElementById('kb-url').value.trim();
+  const domain = document.getElementById('kb-url-domain').value;
+  const customTitle = document.getElementById('kb-url-title').value.trim();
+  if(!url) { toast('נא להזין כתובת URL'); return; }
+  const btn = document.getElementById('btn-process-url');
+  const out = document.getElementById('url-ai-out');
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner"></span> קורא וסוכם...';
+  out.style.display = 'none';
+  try {
+    const text = await callGemini(`גשי לכתובת: ${url}\n\nאם אינך יכולה לגשת לכתובת, השתמשי בידע הכללי שלך על הנושא.\nחלצי את הידע הפדגוגי הרלוונטי לגיל הרך.\nהחזירי:\n1. כותרת המאמר/הדף (שורה אחת)\n2. תמצית הידע הפדגוגי (עד 8 שורות, בעברית)\n3. המלצות מעשיות (עד 4 נקודות)\n\nהתחילי ב: "כותרת: ..." ואז "תמצית: ..."`);
+
+    const titleMatch = text.match(/כותרת:\s*(.+)/);
+    const title = customTitle || (titleMatch ? titleMatch[1].trim() : url);
+    const content = text.replace(/כותרת:\s*.+\n?/,'').trim();
+
+    const kb = loadKB();
+    kb.unshift({ id: Date.now(), title, content, domain, source: url, date: new Date().toLocaleDateString('he-IL') });
+    saveKB(kb);
+
+    out.className = 'ai-box';
+    out.innerHTML = `<div class="ai-header"><i class="ti ti-check"></i> נוסף בהצלחה: "${title}"</div>${content.replace(/\n/g,'<br>')}`;
+    out.style.display = 'block';
+    toast('הקישור עובד ונוסף לבסיס הידע ✓');
+    updateCounts();
+    document.getElementById('kb-url').value = '';
+    document.getElementById('kb-url-title').value = '';
+  } catch(e) {
+    out.className = 'ai-box'; out.textContent = 'שגיאה בקריאת הקישור. ודאי שהכתובת נכונה ונסי שוב.'; out.style.display = 'block';
+  }
+  btn.disabled = false;
+  btn.innerHTML = '<i class="ti ti-sparkles"></i> קרא וסכם עם AI';
+}
+
+// Activities
+function switchActTab(tab) {
+  ['manual','ai'].forEach(t => {
+    document.getElementById('act-panel-'+t).style.display = t===tab ? 'block' : 'none';
+    document.getElementById('atab-'+t).classList.toggle('active', t===tab);
+  });
+}
+
+function addActivity() {
+  const title = document.getElementById('act-title').value.trim();
+  const desc = document.getElementById('act-desc').value.trim();
+  const domain = document.getElementById('act-domain').value;
+  const age = document.getElementById('act-age').value.trim();
+  const duration = document.getElementById('act-duration').value;
+  if(!title||!desc) { toast('נא למלא שם ותיאור'); return; }
+  const acts = loadActivities();
+  acts.unshift({ id: Date.now(), title, desc, domain, age, duration, date: new Date().toLocaleDateString('he-IL') });
+  saveActivities(acts);
+  ['act-title','act-desc','act-age'].forEach(id => document.getElementById(id).value='');
+  toast('הפעילות נוספה ✓'); updateCounts(); renderActivities();
+}
+
+async function generateActivities() {
+  const domain = document.getElementById('act-ai-domain').value;
+  const age = document.getElementById('act-ai-age').value || 'גיל הרך';
+  const count = document.getElementById('act-ai-count').value;
+  const duration = document.getElementById('act-ai-duration').value;
+  const kb = loadKB();
+  const relevant = kb.filter(e => e.domain==='כללי' || e.domain===domain);
+  const kbText = relevant.length > 0
+    ? relevant.map(e=>`[${e.title}]:\n${e.content}`).join('\n\n')
+    : '(ללא רשומות ידע ספציפיות)';
+  const btn = document.getElementById('btn-gen-act');
+  const out = document.getElementById('act-ai-out');
+  btn.disabled = true; btn.innerHTML = '<span class="spinner"></span> מייצר פעילויות...';
+  out.style.display = 'none';
+  try {
+    const text = await callGemini(`אתה יועץ פדגוגי מומחה לגיל הרך.\n\nבסיס ידע:\n${kbText}\n\nייצרי ${count} פעילויות התפתחותיות לתחום: ${domain}\nטווח גיל: ${age} חודשים\nמשך כל פעילות: ${duration}\n\nלכל פעילות כתבי בפורמט הזה:\n🎯 שם הפעילות\nמטרה: ...\nחומרים: ...\nשלבים: ...\nהערות: ...\n\n---\n\nכתבי בעברית בלבד, ממוקד ומעשי.`);
+
+    // Auto-save each activity
+    const acts = loadActivities();
+    const blocks = text.split('---').filter(b=>b.trim());
+    blocks.forEach(block => {
+      const titleMatch = block.match(/🎯\s*(.+)/);
+      const title = titleMatch ? titleMatch[1].trim() : 'פעילות AI';
+      acts.unshift({ id: Date.now()+Math.random(), title, desc: block.trim(), domain, age, duration, date: new Date().toLocaleDateString('he-IL'), aiGenerated: true });
+    });
+    saveActivities(acts);
+
+    out.className = 'ai-box';
+    out.innerHTML = `<div class="ai-header"><i class="ti ti-sparkles"></i> ${blocks.length} פעילויות נוצרו ונשמרו</div>${text.replace(/\n/g,'<br>')}`;
+    out.style.display = 'block';
+    toast(`${blocks.length} פעילויות נוספו ✓`); updateCounts(); renderActivities();
+  } catch(e) {
+    out.className = 'ai-box'; out.textContent = 'שגיאה. נסי שוב.'; out.style.display = 'block';
+  }
+  btn.disabled = false; btn.innerHTML = '<i class="ti ti-sparkles"></i> ייצר פעילויות';
+}
+
+function deleteActivity(id) { saveActivities(loadActivities().filter(x=>x.id!==id)); toast('נמחק'); updateCounts(); renderActivities(); }
+
+function renderActivities() {
+  const acts = loadActivities();
+  const filter = document.getElementById('act-filter')?.value||'';
+  const filtered = acts.filter(a => !filter || a.domain===filter);
+  const el = document.getElementById('activities-list');
+  if(!filtered.length) {
+    el.innerHTML = '<div class="empty-state"><i class="ti ti-puzzle empty-icon"></i><p>אין פעילויות עדיין</p><span>הוסיפי ידנית או ייצרי עם AI</span></div>';
+    return;
+  }
+  el.innerHTML = filtered.map(a => `
+    <div class="kb-entry">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px;">
+        <div style="display:flex;align-items:center;flex-wrap:wrap;gap:5px;">
+          ${a.aiGenerated?'<span style="font-size:10px;background:#f3e8ff;color:#7c3aed;padding:1px 7px;border-radius:999px;font-weight:600;">✨ AI</span>':''}
+          <span style="font-size:13px;font-weight:600;color:var(--text);">${a.title}</span>
+          <span class="kb-tag">${a.domain}</span>
+          ${a.age?`<span style="font-size:10px;color:var(--text-soft);">גיל: ${a.age}</span>`:''}
+          ${a.duration?`<span style="font-size:10px;color:var(--text-soft);">⏱ ${a.duration}</span>`:''}
+        </div>
+        <button class="btn-sm btn-danger" onclick="deleteActivity(${a.id})"><i class="ti ti-trash"></i></button>
+      </div>
+      <div style="font-size:12px;color:var(--text-soft);line-height:1.7;white-space:pre-line;">${a.desc}</div>
+      <div style="font-size:11px;color:var(--text-lighter);margin-top:6px;">${a.date}</div>
+    </div>`).join('');
+}
+
+document.getElementById('date').value = new Date().toISOString().split('T')[0];
+updateCounts();
+</script>
+
+
+</body></html>
